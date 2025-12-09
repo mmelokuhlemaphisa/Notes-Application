@@ -4,7 +4,7 @@
     "slug": "Notes-Application",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/Notes Splash.png",
+    "icon": "./assets/images/Notes-Splush.png",
     "scheme": "notesapplication",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -14,23 +14,23 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/Notes Splash.png",
-        "backgroundImage": "./assets/Notes Splash.png",
-        "monochromeImage": "./assets/Notes Splash.png"
+        "foregroundImage": "./assets/images/Notes-Splush.png",
+        "backgroundImage": "./assets/images/Notes-Splush.png",
+        "monochromeImage": "./assets/images/Notes-Splush.png"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
     "web": {
       "output": "static",
-      "favicon": "./assets/Notes Splash.png"
+      "favicon": "./assets/images/Notes-Splush.png"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/Notes Splash.png",
+          "image": "./assets/images/Notes-Splush.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",
