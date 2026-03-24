@@ -1,26 +1,39 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const storeData = async (key: string, value: any) => {
-  try {
-    await AsyncStorage.setItem(key, JSON.stringify(value));
-  } catch (e) {
-    console.error("Saving error:", e);
-  }
+export type Note = {
+  id: string;
+  title?: string;
+  content: string;
+  category: string;
+  createdAt: string;
+  updatedAt?: string;
 };
 
-export const getData = async (key: string) => {
-  try {
-    const value = await AsyncStorage.getItem(key);
-    return value ? JSON.parse(value) : null;
-  } catch (e) {
-    console.error("Reading error:", e);
-  }
+const NOTES_KEY = "NOTES_STORAGE";
+
+export const getNotes = async (): Promise<Note[]> => {
+  const data = await AsyncStorage.getItem(NOTES_KEY);
+  return data ? JSON.parse(data) : [];
 };
 
-export const removeData = async (key: string) => {
-  try {
-    await AsyncStorage.removeItem(key);
-  } catch (e) {
-    console.error("Remove error:", e);
-  }
+export const saveNotes = async (notes: Note[]) => {
+  await AsyncStorage.setItem(NOTES_KEY, JSON.stringify(notes));
+};
+
+export const addNote = async (note: Note) => {
+  const notes = await getNotes();
+  notes.push(note);
+  await saveNotes(notes);
+};
+
+export const updateNote = async (note: Note) => {
+  let notes = await getNotes();
+  notes = notes.map((n) => (n.id === note.id ? note : n));
+  await saveNotes(notes);
+};
+
+export const deleteNote = async (id: string) => {
+  let notes = await getNotes();
+  notes = notes.filter((n) => n.id !== id);
+  await saveNotes(notes);
 };

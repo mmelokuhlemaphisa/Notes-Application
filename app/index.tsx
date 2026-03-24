@@ -1,107 +1,143 @@
-// LandingPage.tsx
+import { useRouter } from "expo-router";
 import React from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
   StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
 
-const LandingPage: React.FC = () => {
-  const navigation = useNavigation<any>();
+export default function IndexScreen() {
+  const router = useRouter();
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" />
-      <Text style={styles.title}>React Native Notes</Text>
-      <Text style={styles.subtitle}>
-        Organize your thoughts, manage notes, and stay productive.
-      </Text>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("Login")}
-      >
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={[styles.button, styles.registerButton]}
-        onPress={() => navigation.navigate("Register")}
-      >
-        <Text style={[styles.buttonText, styles.registerButtonText]}>
-          Register
+      <StatusBar barStyle="light-content" backgroundColor="#667eea" />
+      <View style={styles.header}>
+        <Ionicons name="document-text-outline" size={80} color="#fff" />
+        <Text style={styles.title}>Notes App</Text>
+        <Text style={styles.subtitle}>
+          Organize your thoughts, ideas, and tasks in one beautiful place.
         </Text>
-      </TouchableOpacity>
+      </View>
 
-      <TouchableOpacity
-        style={styles.infoButton}
-        onPress={() => navigation.navigate("About")}
-      >
-        <Text style={styles.infoButtonText}>Learn More</Text>
-      </TouchableOpacity>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.primaryButton}
+          onPress={() => router.push("/login" as any)}
+        >
+          <Ionicons name="log-in-outline" size={20} color="#fff" />
+          <Text style={styles.primaryButtonText}>Login</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.secondaryButton}
+          onPress={() => router.push("/register" as any)}
+        >
+          <Ionicons name="person-add-outline" size={20} color="#667eea" />
+          <Text style={styles.secondaryButtonText}>Create Account</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.features}>
+        <View style={styles.feature}>
+          <Ionicons name="create-outline" size={24} color="#fff" />
+          <Text style={styles.featureText}>Create Notes</Text>
+        </View>
+        <View style={styles.feature}>
+          <Ionicons name="search-outline" size={24} color="#fff" />
+          <Text style={styles.featureText}>Search & Filter</Text>
+        </View>
+        <View style={styles.feature}>
+          <Ionicons name="folder-outline" size={24} color="#fff" />
+          <Text style={styles.featureText}>Categorize</Text>
+        </View>
+      </View>
     </View>
   );
-};
-
-export default LandingPage;
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#5D54A4", 
+    backgroundColor: "#667eea",
+  },
+  header: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 25,
+    paddingHorizontal: 30,
   },
   title: {
     fontSize: 36,
-    fontWeight: "700",
+    fontWeight: "bold",
     color: "#fff",
-    marginBottom: 12,
+    marginTop: 20,
+    marginBottom: 10,
     textAlign: "center",
   },
   subtitle: {
-    fontSize: 18,
-    color: "#DADADA",
+    fontSize: 16,
+    color: "#E8EAF6",
     textAlign: "center",
-    marginBottom: 50,
-    lineHeight: 25,
+    lineHeight: 24,
+    marginBottom: 40,
   },
-  button: {
-    width: "80%",
-    backgroundColor: "white",
+  buttonContainer: {
+    paddingHorizontal: 30,
+    paddingBottom: 50,
+  },
+  primaryButton: {
+    flexDirection: "row",
+    backgroundColor: "#fff",
     paddingVertical: 16,
     borderRadius: 12,
-    marginBottom: 18,
+    marginBottom: 15,
     alignItems: "center",
+    justifyContent: "center",
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 5, 
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
-  buttonText: {
-    color: "#5D54A4",
+  primaryButtonText: {
+    color: "#667eea",
     fontSize: 18,
     fontWeight: "600",
+    marginLeft: 8,
   },
-  registerButton: {
-    backgroundColor: "#fff",
+  secondaryButton: {
+    flexDirection: "row",
+    backgroundColor: "transparent",
+    borderWidth: 2,
+    borderColor: "#fff",
+    paddingVertical: 16,
+    borderRadius: 12,
+    alignItems: "center",
+    justifyContent: "center",
   },
-  registerButtonText: {
-    color: "#5D54A4",
-    fontWeight: "700",
-  },
-  infoButton: {
-    marginTop: 25,
-  },
-  infoButtonText: {
+  secondaryButtonText: {
     color: "#fff",
-    fontSize: 16,
-    textDecorationLine: "underline",
+    fontSize: 18,
+    fontWeight: "600",
+    marginLeft: 8,
+  },
+  features: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    paddingHorizontal: 20,
+    paddingBottom: 30,
+  },
+  feature: {
+    alignItems: "center",
+  },
+  featureText: {
+    color: "#fff",
+    fontSize: 12,
+    marginTop: 5,
     fontWeight: "500",
   },
 });
